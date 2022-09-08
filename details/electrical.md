@@ -19,7 +19,8 @@ These motors actually draw more current than the L293D can provide, when stalled
 and for safety.
 
 ## Final Design
-The final circuit only contained the ESP32
-Only esp and l298n
-
-simplicity
+The final circuit only contained the ESP32 and the L298N driver. The new driver had a 5 volt output so, we were able to make the circuit without the buck convertor. There
+was also an on off switch in the live wire coming from the Lion battery to the driver. The battery was tightly integrated into our chassis as we needed the CoM to be at a 
+specific position.
+Thus, 
+the design ended up being very simple and compact.
