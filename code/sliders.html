@@ -1,0 +1,109 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width">
+</head>
+<style>
+  .unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+input[type="range"] {
+  -webkit-appearance: slider-vertical;
+  height:225px;
+  width:250px;
+}
+
+</style>
+
+
+
+  <div style="float:left;"> 
+    <input type="range" id="Left" name="Left" min="10" max="70" ontouchmove="slider_move()" ontouchend="slider_off()">
+  </div>
+
+
+  <div style="float:right;">
+    <input type="range" id="Right" name="Right" min="10" max="70" ontouchmove="slider_move()" ontouchend="slider_off()">
+  </div>
+
+
+
+
+<div style="text-align:center;">
+        <button class="unselectable" ontouchstart="down()" ontouchend="off()" style="height:100px;width:100px;"> Down </button>                                                    </div>
+</div>
+
+
+<div style="text-align:center;">
+	<button class="unselectable" ontouchstart="Emergency_stop()" ontouchend="slider_off()" style="height:100px;width:100px;"> Emergency Stop </button>
+</div>
+
+
+
+<script>
+    var fast = 1;
+    var url = "http://192.168.4.1/control?";
+    var slider_l = document.getElementById("Left").value;
+    var slider_r = document.getElementById("Right").value;
+
+
+
+    function Emergency_stop(){
+	   document.getElementById("Left").value = 10;
+	   document.getElementById("Right").value = 10;
+	   var x = document.getElementById("Left").value;
+	   var y = document.getElementById("Right").value;
+        var m = x - 40;
+	   var n = y - 40;
+        document.getElementById("demo").innerHTML = "L: " + m + " R: " + n;
+        fetch(url + x + y)
+    }
+    
+    function down(){
+        fetch(url+"down")
+    }
+
+    function slider_move(){
+	   var x = document.getElementById("Left").value;
+	   var y = document.getElementById("Right").value;
+	   var m = x - 40;
+	   var n = y - 40;
+        document.getElementById("demo").innerHTML = "L: " + m + " R: " + n;
+	   fetch(url + x + y)	
+    }
+
+
+    function slider_off(){
+	   document.getElementById("Left").value = 40;
+	   document.getElementById("Right").value = 40;
+	   var x = document.getElementById("Left").value;
+	   var y = document.getElementById("Right").value;
+        var m = x - 40;
+	   var n = y - 40;
+        document.getElementById("demo").innerHTML = "L: " + m + " R: " + n;
+        fetch(url + x + y)
+    }
+
+    function off(){
+        fetch(url+"off")
+    }
+
+    function toggle(){
+        if(fast==1){
+	   fast=0;
+           document.getElementById("toggle").innerHTML="Slow"
+	   fetch(url+"slow");
+	}
+	else{
+           fast=1;
+           fetch(url+"fast");
+	}
+    }
+</script>
+</body>
+</html>

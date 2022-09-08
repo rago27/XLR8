@@ -1,0 +1,128 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width">
+</head>
+<style>
+  .unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+input[type="range"] {
+  -webkit-appearance: slider-vertical;
+  height:225px;
+  width:250px;
+}
+
+</style>
+
+<div style="float:left;">
+        <button class="unselectable" ontouchstart="lfull()" ontouchend="loff()" style="height:90px;width:200px;"> Full Left</button>                                 
+</div>
+
+
+<div style="float:right;">
+	<button class="unselectable" ontouchstart="rfull()" ontouchend="roff()" style="height:90px;width:200px;"> Full Right </button>
+</div>
+
+<div style="text-align:center;">
+        <button class="unselectable" ontouchstart="bothfull()" ontouchend="bothoff()" style="height:90px;width:120px;"> Forward </button>
+</div>
+
+<div style="float:left;">
+        <button class="unselectable" ontouchstart="lhalf()" ontouchend="loff()" style="height:90px;width:200px;"> Half Left </button>                                 
+</div>
+
+<div style="float:right;">
+	<button class="unselectable" ontouchstart="rhalf()" ontouchend="roff()" style="height:90px;width:200px;"> Half Right </button>
+</div>
+
+</br>
+</br>
+</br>
+</br>
+</br>
+
+<div style="float:left;">
+        <button class="unselectable" ontouchstart="lrev()" ontouchend="loff()" style="height:90px;width:200px;"> Reverse Left </button>                                 
+</div>
+
+
+<div style="float:right;">
+	<button class="unselectable" ontouchstart="rrev()" ontouchend="roff()" style="height:90px;width:200px;"> Reverse Right </button>
+</div>
+
+<script>
+    var url = "http://192.168.4.1/control?";
+    var l = "a";
+    var r = "a";
+    
+    function output(){
+	   fetch(url+l+r)
+    }
+
+
+    function lfull(){
+	   l = "d";
+	   output();
+    }
+
+    
+    function lhalf(){
+	   l = "c";
+	   output();
+    }
+
+    
+    function lrev(){
+	   l = "b";
+	   output();
+    }
+
+    function loff(){
+	   l = "a";
+	   output();
+    }
+
+    function rfull(){
+	   r = "d";
+	   output();
+    }
+
+    
+    function rhalf(){
+	   r = "c";
+	   output();
+    }
+
+    
+    function rrev(){
+	   r = "b";
+	   output();
+    }
+
+    function roff(){
+	   r = "a";
+	   output();
+    }
+
+    function bothfull(){
+	   l = "d";
+	   r = "d" 
+	   output();
+    }
+
+    
+    function bothoff(){
+	   l = "a";
+	   r = "a";
+	   output();
+    }
+
+</script>
+</body>
+</html>
